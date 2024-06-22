@@ -1,0 +1,7 @@
+# Ignore CLion specific files
+.idea/
+*.iml
+cmake-build-*/
+
+# Custom ignores
+notes.txt
