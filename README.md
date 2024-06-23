@@ -19,12 +19,15 @@ The Contact Management System is a simple C program that allows users to manage 
 ├── src
 │   ├── contacts.c
 │   └── main.c
+├── tests
+│   └── test_contacts.cpp
 └── README.md
 ```
 
 ## Requirements
 - CMake 3.22.1 or higher
 - A C compiler (e.g., GCC)
+- A C++ compiler for running tests
 
 ## Building the Project
 1. Clone the repository:
@@ -50,12 +53,29 @@ The Contact Management System is a simple C program that allows users to manage 
     ```
    or if you don't have make:
     ```sh
-    cmake --build
+    cmake --build .
     ```
 
 5. Run the executable:
     ```sh
     ./contact_management_c
+    ```
+
+## Running Tests
+Tests are written using the Catch2 testing framework.
+
+1. Build the tests:
+    ```sh
+    make tests
+    ```
+   or if you don't have make:
+    ```sh
+    cmake --build . --target tests
+    ```
+
+2. Run the tests:
+    ```sh
+    ./tests
     ```
 
 ## Usage

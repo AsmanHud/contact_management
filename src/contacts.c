@@ -27,7 +27,8 @@ Contact *add_contact(const char *name, const char *phone, const char *email, Con
     if (validate_info(name, MAX_NAMELEN) ||
         validate_info(phone, MAX_PHONELEN) ||
         validate_info(email, MAX_EMAILLEN) ||
-        contact_count == NULL) {
+        contact_count == NULL ||
+        search_contact(name, database, *contact_count) != NULL) {
         return NULL;
     }
 
@@ -153,9 +154,9 @@ Contact *load_contacts_from_file(Contact *database, int *contact_count, const ch
     char line[256];
     int error_flag = 0;
     while (fgets(line, sizeof(line), file) != NULL) {
-        for (int i = (int)strlen(line)-1; i >= 0; --i) {
+        for (int i = (int) strlen(line) - 1; i >= 0; --i) {
             if (line[i] != '\n' && line[i] != '\r') {
-                line[i+1] = '\0';
+                line[i + 1] = '\0';
                 break;
             }
         }
