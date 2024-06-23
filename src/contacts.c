@@ -7,7 +7,7 @@
 // - data is not longer than max specification
 // - data is not empty
 // - data does not contain newlines
-static int validate_info(char *data, int maxlen) {
+static int validate_info(const char *data, int maxlen) {
     if ((data == NULL) ||
         (strlen(data) > maxlen) ||
         (strlen(data) == 0) ||
@@ -23,7 +23,7 @@ void print_contact(Contact contact) {
     printf("Email: %s\n", contact.email);
 }
 
-Contact *add_contact(char *name, char *phone, char *email, Contact *database, int *contact_count) {
+Contact *add_contact(const char *name, const char *phone, const char *email, Contact *database, int *contact_count) {
     if (validate_info(name, MAX_NAMELEN) ||
         validate_info(phone, MAX_PHONELEN) ||
         validate_info(email, MAX_EMAILLEN) ||
@@ -50,7 +50,7 @@ Contact *add_contact(char *name, char *phone, char *email, Contact *database, in
     return updated_database;
 }
 
-Contact *search_contact(char *name, Contact *database, int contact_count) {
+Contact *search_contact(const char *name, Contact *database, int contact_count) {
     if (validate_info(name, MAX_NAMELEN) ||
         database == NULL) {
         return NULL;
@@ -63,7 +63,7 @@ Contact *search_contact(char *name, Contact *database, int contact_count) {
     return NULL; // if the contact is not found
 }
 
-Contact *delete_contact(char *name, Contact *database, int *contact_count) {
+Contact *delete_contact(const char *name, Contact *database, int *contact_count) {
     if (validate_info(name, MAX_NAMELEN) ||
         database == NULL ||
         contact_count == NULL) {
@@ -138,12 +138,13 @@ static void print_invalid_contact_msg(int contact_count, const char *invalid_dat
 
 Contact *load_contacts_from_file(Contact *database, int *contact_count, const char *input_file) {
     FILE *file;
-    file = fopen(input_file, "r");
+    file = fopen(input_file, "a+");
     if (file == NULL) {
         fprintf(stderr, "Failed to open the file, when loading contacts: %s\n", input_file);
         free(database);
         exit(EXIT_FAILURE);
     }
+    fseek(file, 0, SEEK_SET);
 
     char name[MAX_NAMELEN + 1] = "";
     char phone[MAX_NAMELEN + 1] = "";

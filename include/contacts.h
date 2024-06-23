@@ -6,8 +6,6 @@
  * @brief Defines the structures and functions for managing contacts in the contact management system.
  */
 
-#include <stddef.h>
-
 #define MAX_NAMELEN 100
 #define MAX_PHONELEN 15
 #define MAX_EMAILLEN 100
@@ -36,7 +34,7 @@ typedef struct {
  * @param contact_count Pointer to the number of contacts in the database.
  * @return A pointer to the updated contact database.
  */
-Contact *add_contact(char *name, char *phone, char *email, Contact *database, int *contact_count);
+Contact *add_contact(const char *name, const char *phone, const char *email, Contact *database, int *contact_count);
 
 /**
  * @brief Searches for a contact by name.
@@ -46,7 +44,7 @@ Contact *add_contact(char *name, char *phone, char *email, Contact *database, in
  * @param contact_count The number of contacts in the database.
  * @return A pointer to the found contact, or NULL if not found.
  */
-Contact *search_contact(char *name, Contact *database, int contact_count);
+Contact *search_contact(const char *name, Contact *database, int contact_count);
 
 /**
  * @brief Deletes a contact by name.
@@ -56,7 +54,7 @@ Contact *search_contact(char *name, Contact *database, int contact_count);
  * @param contact_count Pointer to the number of contacts in the database.
  * @return A pointer to the updated contact database.
  */
-Contact *delete_contact(char *name, Contact *database, int *contact_count);
+Contact *delete_contact(const char *name, Contact *database, int *contact_count);
 
 /**
  * @brief Lists all contacts in the database.
